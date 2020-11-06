@@ -1,4 +1,4 @@
-import { serve } from './morph/Server.tsx';
+import { serve } from './morph/server.ts';
 
 import app from './morph.config.ts';
 

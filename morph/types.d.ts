@@ -11,7 +11,7 @@ export type Application = {
   port?: number;
 };
 
-export type AppProps = {
+export type RouterProps = {
   routes: Route[];
   initialPath: Path;
   initialProps?: any;
