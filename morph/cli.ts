@@ -1,9 +1,29 @@
 import { join, parse } from './deps.ts';
 import { serve } from './server.ts';
 
-async function development(): Promise<void> {
+import { Application, Route } from './types.d.ts';
+
+async function getApp(): Promise<Application> {
   const { default: app } = await import(join(Deno.cwd(), 'morph.config.ts'));
+  return Promise.resolve(app);
+}
+
+async function development(): Promise<void> {
+  const app = await getApp();
+
   serve(app);
+}
+
+async function routes(): Promise<void> {
+  const app = await getApp();
+
+  const reducer =
+    (acc: string, { path, getServerSideProps }: Route) =>
+      `${acc}\n[${!!getServerSideProps ? 'SSR' : 'SSG'}] ${path}`;
+
+  const message = app.routes.reduce(reducer, `Application routes:`);
+
+  console.log(message);
 }
 
 interface Command {
@@ -17,6 +37,10 @@ const commands: Command = {
   'dev': {
     handler: development,
     description: 'Start the application in development mode',
+  },
+  'routes': {
+    handler: routes,
+    description: 'List all the application routes',
   },
 };
 
