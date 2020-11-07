@@ -1,29 +1,42 @@
 import { join, parse } from './deps.ts';
 import { serve } from './server.ts';
 
-(async () => {
-  const app = await import(join(Deno.cwd(), 'morph.config.ts'));
+async function development(): Promise<void> {
+  const { default: app } = await import(join(Deno.cwd(), 'morph.config.ts'));
+  serve(app);
+}
 
+interface Command {
+  [key: string]: {
+    handler: any;
+    description: string;
+  };
+}
+
+const commands: Command = {
+  'dev': {
+    handler: development,
+    description: 'Start the application in development mode',
+  },
+};
+
+const HELP_MESSAGE = `morph
+Morph command line interface.
+
+Usage:
+  morph <command> [...options]
+
+Commands:
+  ${Object.entries(commands).map(([command, { description }]) => `${command}: ${description}`).join('\n  ')}
+`;
+
+if (import.meta.main) {
   const [command] = Deno.args;
+  const match = commands[command];
 
-  enum Command {
-    Dev = 'dev',
-    Build = 'build',
-    Export = 'export',
-    Start = 'start',
+  if (match) {
+    match.handler();
+  } else {
+    console.log(HELP_MESSAGE);
   }
-
-  switch (command) {
-    case Command.Dev: {
-      serve(app);
-      break;
-    }
-    case Command.Start: {
-      serve(app);
-      break;
-    }
-    default:
-      console.warn(`${command} is not supported yet`);
-      break;
-  }
-})();
+}
