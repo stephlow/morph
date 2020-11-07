@@ -1,2 +1,2 @@
-export { React } from './deps.ts';
-export * from './types.d.ts';
+export { React } from "./deps.ts";
+export * from "./types.d.ts";

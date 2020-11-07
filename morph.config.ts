@@ -1,22 +1,22 @@
-import { Route, Application } from './morph/mod.ts';
+import { Application, Route } from "./morph/mod.ts";
 
-import IndexPage from './src/IndexPage.tsx';
-import AboutPage from './src/AboutPage.tsx';
-import ExceptionPage from './src/ExceptionPage.tsx';
+import IndexPage from "./src/IndexPage.tsx";
+import AboutPage from "./src/AboutPage.tsx";
+import ExceptionPage from "./src/ExceptionPage.tsx";
 
 const frontpage: Route = {
-  path: '/',
+  path: "/",
   component: IndexPage,
-  getServerSideProps: async () => ({ message: 'Hello World' }),
+  getServerSideProps: async () => ({ message: "Hello World" }),
 };
 
 const about: Route = {
-  path: '/about',
+  path: "/about",
   component: AboutPage,
 };
 
 const exception: Route = {
-  path: '/exception',
+  path: "/exception",
   component: ExceptionPage,
 };
 

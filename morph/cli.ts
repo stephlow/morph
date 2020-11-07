@@ -1,10 +1,10 @@
-import { join, parse } from './deps.ts';
-import { serve } from './server.ts';
+import { join, parse } from "./deps.ts";
+import { serve } from "./server.ts";
 
-import { Application, Route } from './types.d.ts';
+import { Application, Route } from "./types.d.ts";
 
 async function getApp(): Promise<Application> {
-  const { default: app } = await import(join(Deno.cwd(), 'morph.config.ts'));
+  const { default: app } = await import(join(Deno.cwd(), "morph.config.ts"));
   return Promise.resolve(app);
 }
 
@@ -17,9 +17,8 @@ async function development(): Promise<void> {
 async function routes(): Promise<void> {
   const app = await getApp();
 
-  const reducer =
-    (acc: string, { path, getServerSideProps }: Route) =>
-      `${acc}\n[${!!getServerSideProps ? 'SSR' : 'SSG'}] ${path}`;
+  const reducer = (acc: string, { path, getServerSideProps }: Route) =>
+    `${acc}\n[${!!getServerSideProps ? "SSR" : "SSG"}] ${path}`;
 
   const message = app.routes.reduce(reducer, `Application routes:`);
 
@@ -34,13 +33,13 @@ interface Command {
 }
 
 const commands: Command = {
-  'dev': {
+  "dev": {
     handler: development,
-    description: 'Start the application in development mode',
+    description: "Start the application in development mode",
   },
-  'routes': {
+  "routes": {
     handler: routes,
-    description: 'List all the application routes',
+    description: "List all the application routes",
   },
 };
 
@@ -51,7 +50,11 @@ Usage:
   morph <command> [...options]
 
 Commands:
-  ${Object.entries(commands).map(([command, { description }]) => `${command}: ${description}`).join('\n  ')}
+  ${
+  Object.entries(commands).map(([command, { description }]) =>
+    `${command}: ${description}`
+  ).join("\n  ")
+}
 `;
 
 if (import.meta.main) {

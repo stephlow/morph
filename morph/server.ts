@@ -1,8 +1,8 @@
-import { serve as baseServe } from './deps.ts';
+import { serve as baseServe } from "./deps.ts";
 
-import Document, { renderDocument } from './Document.tsx';
+import Document, { renderDocument } from "./Document.tsx";
 
-import { Application, RouterProps } from './types.d.ts';
+import { Application, RouterProps } from "./types.d.ts";
 
 export const serve = async ({ routes, port = 3000 }: Application) => {
   const server = baseServe({ port });
@@ -14,7 +14,7 @@ export const serve = async ({ routes, port = 3000 }: Application) => {
     let initialProps = {};
     const route = routes.find((route) => route.path === path);
     if (route) {
-      if (typeof route.getServerSideProps === 'function') {
+      if (typeof route.getServerSideProps === "function") {
         initialProps = await route.getServerSideProps();
       }
     } else {
@@ -25,7 +25,7 @@ export const serve = async ({ routes, port = 3000 }: Application) => {
       routes: routes,
       initialPath: path,
       initialProps: initialProps,
-      renderContext: 'server',
+      renderContext: "server",
     });
 
     req.respond({ body });

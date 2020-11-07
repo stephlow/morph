@@ -1,4 +1,4 @@
-import { React } from '../../morph/deps.ts';
+import { React } from "../../morph/deps.ts";
 
 const Layout: React.FC = ({ children }) => {
   return (

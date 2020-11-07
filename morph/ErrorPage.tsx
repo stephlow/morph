@@ -1,6 +1,6 @@
-import { React } from './deps.ts';
+import { React } from "./deps.ts";
 
-import { ErrorPageProps } from './types.d.ts';
+import { ErrorPageProps } from "./types.d.ts";
 
 const ErrorPage: React.FC<ErrorPageProps> = ({ code }) => {
   return (

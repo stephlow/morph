@@ -1,8 +1,8 @@
-import { React, ReactDOMServer } from './deps.ts';
+import { React, ReactDOMServer } from "./deps.ts";
 
-import { RouterProps } from './types.d.ts';
+import { RouterProps } from "./types.d.ts";
 
-import Router from './Router.tsx';
+import Router from "./Router.tsx";
 
 export const renderDocument = (props: RouterProps) => {
   let body;
@@ -10,10 +10,10 @@ export const renderDocument = (props: RouterProps) => {
     body = (ReactDOMServer as any).renderToString(
       <Document>
         <Router {...props} />
-      </Document>
+      </Document>,
     );
-  } catch(e) {
-    body = 'Error';
+  } catch (e) {
+    body = "Error";
   }
 
   return `<!DOCTYPE html>${body}`;
@@ -25,10 +25,13 @@ const Document: React.FC = ({ children }) => {
       <html lang="en">
         <head>
           <meta charSet="UTF-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
           <title>Morph App</title>
         </head>
-        <body >
+        <body>
           <div id="__morph">{children}</div>
         </body>
       </html>

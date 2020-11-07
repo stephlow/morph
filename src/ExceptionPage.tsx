@@ -1,5 +1,5 @@
-import { React } from '../morph/deps.ts';
-import Layout from './components/Layout.tsx';
+import { React } from "../morph/deps.ts";
+import Layout from "./components/Layout.tsx";
 
 const ExceptionPage: React.FC = () => {
   throw new Error();
