@@ -1,4 +1,4 @@
-import { Route, Application } from './morph/types.d.ts';
+import { Route, Application } from './morph/mod.ts';
 
 import IndexPage from './src/IndexPage.tsx';
 import AboutPage from './src/AboutPage.tsx';
